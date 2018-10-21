@@ -19,7 +19,7 @@ mocha.cover: node_modules/.bin/nyc node_modules/.bin/mocha node_modules/esm
 
 # Run mocha tests with detailed code coverage
 mocha.cover.html: node_modules/.bin/nyc node_modules/.bin/mocha node_modules/esm
-	@./node_modules/.bin/nyc --report-dir $(TMPDIR)/mocha --reporter=lcov ./node_modules/.bin/mocha -r esm -g $(GREP) $(MOCHA_TEST)
+	@./node_modules/.bin/nyc --report-dir $(TMPDIR)/mocha --reporter=lcov ./node_modules/.bin/mocha -r esm -g $(MOCHA_GREP) $(MOCHA_TEST)
 	@open $(TMPDIR)/mocha/lcov-report/index.html
 	@rm -rf ./.nyc_output
 

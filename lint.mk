@@ -1,6 +1,6 @@
 DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# What to lint (default: ./)
+# What to lint (default: "./")
 LINT_GLOB ?= "./"
 
 # Dependencies
