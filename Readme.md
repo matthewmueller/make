@@ -28,8 +28,8 @@ precommit: lint test
 
 ## Thanks
 
-  - [@tj](https://github.com/tj) showed how to do github-style imports with [mmake](https://github.com/tj/mmake)
-  - [@ianstormtaylor](https://github.com/ianstormtaylor) created a great [make help](https://github.com/ianstormtaylor/makefile-help) command.
+- [@tj](https://github.com/tj) showed how to do github-style imports with [mmake](https://github.com/tj/mmake)
+- [@ianstormtaylor](https://github.com/ianstormtaylor) created a great [make help](https://github.com/ianstormtaylor/makefile-help) command.
 
 ## License
 
