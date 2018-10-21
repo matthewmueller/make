@@ -1,10 +1,13 @@
 DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
+# What to lint (default: **/*.js)
+LINT_GLOB ?= "**/*.js"
+
 # Dependencies
 ESLINT_CONFIG := $(addprefix eslint-config-, airbnb prettier)
 ESLINT_PLUGINS := $(addprefix eslint-plugin-, import react jsx-a11y prettier)
-ESLINT_DEPENDENCIES := $(ESLINT_CONFIG) $(ESLINT_PLUGINS)
-ESLINT_NODE_MODULES := $(addprefix node_modules/, eslint prettier $(ESLINT_DEPENDENCIES))
+ESLINT_DEPENDENCIES := eslint prettier $(ESLINT_CONFIG) $(ESLINT_PLUGINS)
+ESLINT_NODE_MODULES := $(addprefix node_modules/, $(ESLINT_DEPENDENCIES))
 
 # Add the gitignore to the ignore path if we have one
 ifneq ("$(wildcard ./.gitignore)","")
@@ -13,15 +16,15 @@ endif
 
 # Lint our project (use this as pre-commit)
 lint: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) **/*.js
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) $(LINT_GLOB)
 
 # Fix and lint our project
 lint.fix: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --fix **/*.js
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --fix $(LINT_GLOB)
 
 # Lint our project and watch for changes
 lint.watch: .eslintrc $(ESLINT_NODE_MODULES) node_modules/eslint-watch
-	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) -w --clear --fix **/*.js
+	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) -w --clear --fix $(LINT_GLOB)
 
 # Copy our eslint config into the project
 .eslintrc:

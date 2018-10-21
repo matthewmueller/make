@@ -1,7 +1,7 @@
 DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# Setup and install git hooks into our project
-git.setup: .gitignore .git
+# Install git hooks into our project
+git.install: .gitignore .git
 	@cp $(DIR)/config/pre-commit .git/hooks/pre-commit
 
 # Install a default .gitignore
