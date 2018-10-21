@@ -3,6 +3,7 @@
 
 // ./pages/_document.js
 import Document, { Head, Main, NextScript } from 'next/document'
+import * as React from 'react'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -12,7 +13,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
           <style>{`body { margin: 0 } /* custom! */`}</style>
         </Head>

@@ -4,15 +4,15 @@ DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 PORT ?= 3000
 
 # Dependencies
-NEXT_DEPENDENCIES := next react react-dom babel-plugin-react-html-attrs
+NEXT_DEPENDENCIES := next react react-dom
 NEXT_NODE_MODULES := $(addprefix node_modules/, $(NEXT_DEPENDENCIES))
+NEXT_DEV_DEPENDENCIES := babel-plugin-react-html-attrs @mdx-js/loader
+NEXT_DEV_NODE_MODULES := $(addprefix node_modules/, $(NEXT_DEV_DEPENDENCIES))
+NEXT_FILES := static/favicon.ico pages/index.jsx pages/_document.jsx ./next.config.js
 
 # Start developing a fresh next.js project
-next: $(NEXT_NODE_MODULES) next.init
+next: $(NEXT_NODE_MODULES) $(NEXT_DEV_NODE_MODULES) $(NEXT_FILES)
 	@./node_modules/.bin/next -p $(PORT)
-
-# Initialize a fresh next.js project
-next.init: static/favicon.ico pages/index.jsx pages/_document.jsx ./next.config.js
 
 static/favicon.ico:
 	@mkdir -p ./static
@@ -29,8 +29,8 @@ pages/_document.jsx:
 ./next.config.js:
 	@cp $(DIR)/config/next.config.js ./
 
-node_modules/@mdx-js/loader:
-	@yarn add -D @mdx-js/loader
-
 $(NEXT_NODE_MODULES):
-	@yarn add -D $(notdir $@)
+	@yarn add $(@:node_modules/%=%)
+
+$(NEXT_DEV_NODE_MODULES):
+	@yarn add -D $(@:node_modules/%=%)

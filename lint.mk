@@ -1,7 +1,7 @@
 DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# What to lint (default: **/*.js)
-LINT_GLOB ?= "**/*.js"
+# What to lint (default: ./)
+LINT_GLOB ?= "./"
 
 # Dependencies
 ESLINT_CONFIG := $(addprefix eslint-config-, airbnb prettier)
@@ -16,15 +16,15 @@ endif
 
 # Lint our project (use this as pre-commit)
 lint: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) $(LINT_GLOB)
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --ext .jsx $(LINT_GLOB)
 
 # Fix and lint our project
 lint.fix: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --fix $(LINT_GLOB)
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --ext .jsx --fix $(LINT_GLOB)
 
 # Lint our project and watch for changes
 lint.watch: .eslintrc $(ESLINT_NODE_MODULES) node_modules/eslint-watch
-	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) -w --clear --fix $(LINT_GLOB)
+	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) -w --clear --ext .jsx --fix $(LINT_GLOB)
 
 # Copy our eslint config into the project
 .eslintrc:
