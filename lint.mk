@@ -11,24 +11,30 @@ ESLINT_NODE_MODULES := $(addprefix node_modules/, $(ESLINT_DEPENDENCIES))
 
 # Add the gitignore to the ignore path if we have one
 ifneq ("$(wildcard ./.gitignore)","")
-    ESLINT_IGNORE_PATH = --ignore-path .gitignore
+	ESLINT_IGNORE_PATH = --ignore-path ./.gitignore
+endif
+
+ifneq ("$(wildcard ./.eslintrc)","")
+	LINT_PATH = .eslintrc
+else
+	LINT_PATH = $(DIR)/config/.eslintrc
 endif
 
 # Lint our project (use this as pre-commit)
-lint: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --ext .jsx $(LINT_GLOB)
+lint: $(ESLINT_NODE_MODULES)
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --config $(LINT_PATH) --ext .jsx $(LINT_GLOB)
 
 # Fix and lint our project
-lint.fix: .eslintrc $(ESLINT_NODE_MODULES)
-	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --ext .jsx --fix $(LINT_GLOB)
+lint.fix: $(ESLINT_NODE_MODULES)
+	@./node_modules/.bin/eslint $(ESLINT_IGNORE_PATH) --config $(LINT_PATH) --ext .jsx --fix $(LINT_GLOB)
 
 # Lint our project and watch for changes
-lint.watch: .eslintrc $(ESLINT_NODE_MODULES) node_modules/eslint-watch
-	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) -w --clear --ext .jsx --fix $(LINT_GLOB)
+lint.watch: $(ESLINT_NODE_MODULES) node_modules/eslint-watch
+	@./node_modules/.bin/esw $(ESLINT_IGNORE_PATH) --config $(LINT_PATH) -w --clear --ext .jsx --fix $(LINT_GLOB)
 
 # Copy our eslint config into the project
-.eslintrc:
-	@cp "$(DIR)/config/.eslintrc" "./.eslintrc"
+# .eslintrc:
+# 	@cp "$(DIR)/config/.eslintrc" "./.eslintrc"
 
 # Download all eslint dependencies
 $(ESLINT_NODE_MODULES):
