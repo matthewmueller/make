@@ -12,6 +12,7 @@ help:
 	@ echo "\033[1mUsage\033[0m"
 	@ echo ""
 	@ echo "  $$ make [command]..."
+	@ echo ""
 	@ awk -f $(CONFIG)/help.awk $(MAKEFILE_LIST)
 	@ echo ""
 .PHONY: help

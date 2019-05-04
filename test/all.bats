@@ -140,6 +140,7 @@ EOF
 }
 
 @test "ensure all works" {
+  skip
   cat "${BATS_TEST_DIRNAME}/../all.mk" > "${BATS_TMPDIR}/make/Makefile"
   cat <<EOF >> "${BATS_TMPDIR}/make/Makefile"
 ${NEWLINE}
