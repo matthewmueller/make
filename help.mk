@@ -1,7 +1,6 @@
 .DEFAULT_GOAL := help
 
-# Displays this help message
-.PHONY: help
+## Displays this help message
 help: ROOT := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 help: CONFIG := $(ROOT)/config
 help:
@@ -15,3 +14,4 @@ help:
 	@ echo "  $$ make [command]..."
 	@ awk -f $(CONFIG)/help.awk $(MAKEFILE_LIST)
 	@ echo ""
+.PHONY: help

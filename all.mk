@@ -1,4 +1,4 @@
-include github.com/matthewmueller/dep.mk
-include github.com/matthewmueller/env.mk
-include github.com/matthewmueller/help.mk
-include github.com/matthewmueller/read.mk
+include dep.mk
+include env.mk
+include help.mk
+include read.mk
