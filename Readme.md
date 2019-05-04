@@ -5,7 +5,7 @@ A collection of Makefile utilities
 ## Install
 
 ```sh
-curl https://raw.github.com/matthewmueller/make/master/install.sh | sh
+curl -L https://raw.github.com/matthewmueller/make/master/install.sh | sh
 ```
 
 ## Usage
