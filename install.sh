@@ -1,6 +1,6 @@
 #!/bin/sh
 
-INCLUDE_DIR="/usr/local/include/github.com/matthewmueller/make"
+INCLUDE_DIR="/usr/local/include/github.com/matthewmueller/make/"
 TMP_DIR=$(mktemp -d)
 
 curl -sL https://github.com/matthewmueller/make/archive/master.tar.gz \
