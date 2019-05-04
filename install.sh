@@ -8,4 +8,5 @@ curl -sL https://github.com/matthewmueller/make/archive/master.tar.gz \
 
 # clear old version
 rm -rf "${INCLUDE_DIR}"
+mkdir -p "${INCLUDE_DIR}"
 mv "${TMP_DIR}" "${INCLUDE_DIR}"
