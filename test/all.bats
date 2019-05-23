@@ -15,11 +15,13 @@ if [[ "$(command -v grep)" = "" ]]; then
   exit 1;
 fi
 
+# Setup test
 setup() {
   mkdir -p "${BATS_TMPDIR}/make"
   cp -r ./config "${BATS_TMPDIR}/make/"
 }
 
+# Teardown test
 teardown() {
   rm -rf "${BATS_TMPDIR}/make"
 }
