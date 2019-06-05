@@ -26,11 +26,11 @@ teardown() {
   rm -rf "${BATS_TMPDIR}/make"
 }
 
-@test "dep present" {
-  cat "${BATS_TEST_DIRNAME}/../dep.mk" > "${BATS_TMPDIR}/make/Makefile"
+@test "bin present" {
+  cat "${BATS_TEST_DIRNAME}/../bin.mk" > "${BATS_TMPDIR}/make/Makefile"
   cat <<EOF >> "${BATS_TMPDIR}/make/Makefile"
 ${NEWLINE}
-test: dep.make
+test: bin.make
 ${TAB}@ echo "ok"
 EOF
   run make -f "${BATS_TMPDIR}/make/Makefile" test
@@ -38,17 +38,17 @@ EOF
   [ "$output" = "ok" ]
 }
 
-@test "dep not present" {
-  cat "${BATS_TEST_DIRNAME}/../dep.mk" > "${BATS_TMPDIR}/make/Makefile"
+@test "bin not present" {
+  cat "${BATS_TEST_DIRNAME}/../bin.mk" > "${BATS_TMPDIR}/make/Makefile"
   cat <<EOF >> "${BATS_TMPDIR}/make/Makefile"
 ${NEWLINE}
-test: dep.makez
+test: bin.makez
 ${TAB}@ echo "ok"
 EOF
   run make -f "${BATS_TMPDIR}/make/Makefile" test
   [ "$status" -eq 2 ]
-  [ "${lines[0]}" = "Required dependency \`makez\` is not found in your \$PATH." ]
-  [ "${lines[1]}" = "make: *** [dep.makez] Error 1" ]
+  [ "${lines[0]}" = "Required binary \`makez\` is not found in your \$PATH." ]
+  [ "${lines[1]}" = "make: *** [bin.makez] Error 1" ]
 }
 
 @test "env present" {
