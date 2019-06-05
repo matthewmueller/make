@@ -25,6 +25,12 @@ include github.com/matthewmueller/make/bin.mk
 include github.com/matthewmueller/make/read.mk
 ```
 
+## Test
+
+```
+./test/all.bats
+```
+
 ## License
 
 MIT
