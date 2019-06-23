@@ -1,6 +1,6 @@
 # Make
 
-A collection of Makefile utilities
+Functional Makefile utilities
 
 ## Install
 

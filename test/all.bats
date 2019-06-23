@@ -129,11 +129,11 @@ EOF
   # echo $output | grep "Test file"
 }
 
-@test "eread" {
+@test "read" {
   cat "${BATS_TEST_DIRNAME}/../read.mk" > "${BATS_TMPDIR}/make/Makefile"
   cat <<EOF >> "${BATS_TMPDIR}/make/Makefile"
 ${NEWLINE}
-test: eread.OK
+test: read.OK
 ${TAB}@ echo \${OK}
 EOF
   OK="ok" run make -f "${BATS_TMPDIR}/make/Makefile" test
